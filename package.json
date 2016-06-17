@@ -1,0 +1,24 @@
+{
+  "name": "tracker-proxy",
+  "version": "0.1.0",
+  "description": "This package provides one intrface for work with different torrent trackers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "run tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reeFridge/tracker-proxy.git"
+  },
+  "keywords": [
+    "torrent",
+    "tracker",
+    "proxy"
+  ],
+  "author": "reeFridge",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reeFridge/tracker-proxy/issues"
+  },
+  "homepage": "https://github.com/reeFridge/tracker-proxy#readme"
+}
