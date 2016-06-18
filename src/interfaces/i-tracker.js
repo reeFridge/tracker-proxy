@@ -8,7 +8,7 @@ class ITracker {
    * @param {QueryParams=} optParams
    * @return {Promise.<IQueryResponse|error>}
    */
-  getQuery(optParams) {}
+  doQuery(optParams) {}
 
   /**
    * Tracker availability check.
@@ -17,10 +17,10 @@ class ITracker {
   isAvailable() {}
 
   /**
-   * Get tracker url.
+   * Getter for private tracker url variable.
    * @return {string}
    */
-  getUrl() {}
+  get url() {}
 }
 
 /**
