@@ -1,69 +1,85 @@
-
-
-
 /**
- * Common torrent interface
+ * Common Torrent interface
  * @interface
  */
-ITorrent = function() {};
+class ITorrent {
+  /**
+   * Get torrent title
+   * @return {string}
+   */
+  get title() {}
 
+  /**
+   * Get torrent page url
+   * @return {string}
+   */
+  get pageUrl() {}
+
+  /**
+   * Get torrent file url
+   * @return {string}
+   */
+  get torrentUrl() {}
+
+  /**
+   * Get magnet uri
+   * @return {string}
+   */
+  get magnet() {}
+
+  /**
+   * Get torrent publication date
+   * @return {Date}
+   */
+  get publicationDate() {}
+
+  /**
+   * Get files count in the torrent
+   * @return {number}
+   */
+  get filesCount() {}
+
+  /**
+   * Get array of files in the torrent
+   * @return {Array.<File>}
+   */
+  get files() {}
+
+  /**
+   * Get peers count
+   * @return {number}
+   */
+  get peers() {}
+
+  /**
+   * Get leeches count
+   * @return {number}
+   */
+  get leechs() {}
+
+  /**
+   * Get seeds count
+   * @return {number}
+   */
+  get seeds() {}
+
+  /**
+   * Get torrent hash
+   * @return {string}
+   */
+  get hash() {}
+
+  /**
+   * Get size of all files included in torrent (in bytes)
+   * @return {number}
+   */
+  get size() {}
+}
 
 /**
- * @return {string}
+ * @typedef {Object} File
+ * @property {string} name File name
+ * @property {size} number Size in bytes
+ * @property {boolean} dir True if file is dir
+ * @property {string} path File path in torrent
  */
-ITorrent.prototype.getTitle = function() {};
-
-
-/**
- * @return {string}
- */
-ITorrent.prototype.getPageUrl = function() {};
-
-
-/**
- * @return {string}
- */
-ITorrent.prototype.getTorrentUrl = function() {};
-
-
-/**
- * @return {Date}
- */
-ITorrent.prototype.getPublicationDate = function() {};
-
-
-/**
- * @return {number}
- */
-ITorrent.prototype.getFilesCount = function() {};
-
-
-/**
- * @return {number}
- */
-ITorrent.prototype.getPeers = function() {};
-
-
-/**
- * @return {number}
- */
-ITorrent.prototype.getLeechs = function() {};
-
-
-/**
- * @return {number}
- */
-ITorrent.prototype.getSeeds = function() {};
-
-
-/**
- * @return {string}
- */
-ITorrent.prototype.getHash = function() {};
-
-
-/**
- * Get size in bytes
- * @return {number}
- */
-ITorrent.prototype.getSize = function() {};
