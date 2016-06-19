@@ -21,11 +21,11 @@ class IQueryResponse {
    * Get array of torrent items in response
    * @return {Array<ITorrent>}
    */
-  get items() {}
+  getItems() {}
 
   /**
    * Get count of items in response
    * @return {number}
    */
-  get itemsCount() {}
+  getItemsCount() {}
 }
