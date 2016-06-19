@@ -8,21 +8,20 @@ class IQueryResponse {
    * @param {string} field
    * @return {void}
    */
-  sortByField() {}
+  sortByField(field) {}
 
   /**
    * Do search query between items from this response
    * @param {QueryParams} [optParams]
    * @return {IQueryResponse}
    */
-  doQuery() {}
+  doQuery(optParams) {}
 
   /**
    * Get array of torrent items in response
-   * @param {number} [optCount] items
    * @return {Array<ITorrent>}
    */
-  get items(optCount) {}
+  get items() {}
 
   /**
    * Get count of items in response
