@@ -20,7 +20,7 @@ class ITracker {
    * Getter for private tracker url variable.
    * @return {string}
    */
-  get url() {}
+  getUrl() {}
 }
 
 /**

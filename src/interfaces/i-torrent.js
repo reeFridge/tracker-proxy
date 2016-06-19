@@ -7,73 +7,73 @@ class ITorrent {
    * Get torrent title
    * @return {string}
    */
-  get title() {}
+  getTitle() {}
 
   /**
    * Get torrent page url
    * @return {string}
    */
-  get pageUrl() {}
+  getPageUrl() {}
 
   /**
    * Get torrent file url
    * @return {string}
    */
-  get torrentUrl() {}
+  getTorrentUrl() {}
 
   /**
    * Get magnet uri
    * @return {string}
    */
-  get magnet() {}
+  getMagnet() {}
 
   /**
    * Get torrent publication date
    * @return {Date}
    */
-  get publicationDate() {}
+  getPublicationDate() {}
 
   /**
    * Get files count in the torrent
    * @return {number}
    */
-  get filesCount() {}
+  getFilesCount() {}
 
   /**
    * Get array of files in the torrent
    * @return {Array<File>}
    */
-  get files() {}
+  getFiles() {}
 
   /**
    * Get peers count
    * @return {number}
    */
-  get peers() {}
+  getPeers() {}
 
   /**
    * Get leeches count
    * @return {number}
    */
-  get leechs() {}
+  getLeechs() {}
 
   /**
    * Get seeds count
    * @return {number}
    */
-  get seeds() {}
+  getSeeds() {}
 
   /**
    * Get torrent hash
    * @return {string}
    */
-  get hash() {}
+  getHash() {}
 
   /**
    * Get size of all files included in torrent (in bytes)
    * @return {number}
    */
-  get size() {}
+  getSize() {}
 }
 
 /**
