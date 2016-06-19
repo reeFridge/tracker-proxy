@@ -1,32 +1,31 @@
-
-
-
 /**
+ * Common QueryResponse interface
  * @interface
  */
-IQueryResponse = function() {};
+class IQueryResponse {
+  /**
+   * Sort items by field
+   * @param {string} field
+   * @return {void}
+   */
+  sortByField(field) {}
 
+  /**
+   * Do search query between items from this response
+   * @param {QueryParams} [optParams]
+   * @return {IQueryResponse}
+   */
+  doQuery(optParams) {}
 
-/**
- * @return {void}
- */
-IQueryResponse.prototype.sortByField = function() {};
+  /**
+   * Get array of torrent items in response
+   * @return {Array<ITorrent>}
+   */
+  getItems() {}
 
-
-/**
- * @return {ITorrent}
- */
-IQueryResponse.prototype.getItem = function() {};
-
-
-/**
- * @return {number}
- */
-IQueryResponse.prototype.getItemsCount = function() {};
-
-
-/**
- * @return {IQueryResponse}
- */
-IQueryResponse.prototype.getItemsQuery = function() {};
-
+  /**
+   * Get count of items in response
+   * @return {number}
+   */
+  getItemsCount() {}
+}

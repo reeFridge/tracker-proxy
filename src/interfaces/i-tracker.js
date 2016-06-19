@@ -5,14 +5,14 @@
 class ITracker {
   /**
    * Search query.
-   * @param {QueryParams=} optParams
-   * @return {Promise.<IQueryResponse|error>}
+   * @param {QueryParams} [optParams]
+   * @return {Promise<IQueryResponse|error>}
    */
   doQuery(optParams) {}
 
   /**
    * Tracker availability check.
-   * @return {Promise.<undefined|error>}
+   * @return {Promise<undefined|error>}
    */
   isAvailable() {}
 
