@@ -41,7 +41,7 @@ class ITorrent {
 
   /**
    * Get array of files in the torrent
-   * @return {Array.<File>}
+   * @return {Array<File>}
    */
   get files() {}
 
