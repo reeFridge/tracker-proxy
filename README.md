@@ -30,7 +30,7 @@ tracker.on('ready', function() {
         .catch(function(err) {
             throw err;
         });
-};
+});
 ```
 
 ## TODO
