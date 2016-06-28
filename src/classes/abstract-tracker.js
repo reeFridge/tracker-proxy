@@ -10,17 +10,31 @@ const request = require('request');
  * @implements {ITracker}
  */
 module.exports = (() => {
+	'use strict';
 	return class AbstractTracker extends EventEmitter {
 		constructor() {
 			super();
+
+			/**
+			 * @type {string}
+			 * @protected
+			 */
+			this._url = '';
 		}
 
 		/**
 		 * @inheritDoc
 		 */
-		doQuery(optParams = {query: 'comics', category: '', maxItems: 10, order: '', desc: false}) {
+		doQuery(optParams) {
+			let params = /** @type {QueryParams} */ {};
+			params.query = optParams.query || 'comics';
+			params.category = optParams.category || '';
+			params.maxItems = optParams.maxItems || 10;
+			params.order = optParams.order || '';
+			params.desc = optParams.category || false;
+
 			return new Promise((resolve, reject) => {
-				this._searchQueryRequest(optParams)
+				this._searchQueryRequest(params)
 					.then(queryResponse => {
 						resolve(queryResponse);
 					})
@@ -42,7 +56,7 @@ module.exports = (() => {
 		 */
 		isAvailable() {
 			return new Promise((resolve, reject) => {
-				probe(this._url, 80, (err, avail) => {
+				probe(this._getDomain(), 80, (err, avail) => {
 					if (err) {
 						reject(err);
 					} else {
@@ -58,7 +72,7 @@ module.exports = (() => {
 
 		/**
 		 * @param {QueryParams} params
-		 * @return {Promise<IQueryResponse|error>}
+		 * @return {Promise.<IQueryResponse|error>}
 		 * @protected
 		 */
 		_searchQueryRequest(params) {
@@ -79,22 +93,31 @@ module.exports = (() => {
 		}
 
 		/**
+		 * @protected
+		 * @return {string}
+		 */
+		_getDomain() {
+			const regExp = /(http|https):\/\//;
+			return this._url.split(regExp)[2];
+		}
+
+		/**
 		 * @param {QueryParams} params
 		 * @abstract
 		 * @protected
 		 */
 		_createQueryUrl(params) {
-			throw new Error('Method is not implemented');
+			throw new Error('Protected method _createQueryUrl is not implemented');
 		}
 
 		/**
 		 * @param {string} responseData
-		 * @return {Promise<IQueryResponse|error>
+		 * @return {Promise.<IQueryResponse|error>
 		 * @abstract
 		 * @protected
 		 */
 		_createQueryResponse(responseData) {
-			throw new Error('Method is not implemented');
+			throw new Error('Protected method _createQueryResponse is not implemented');
 		};
 	}
 })();
