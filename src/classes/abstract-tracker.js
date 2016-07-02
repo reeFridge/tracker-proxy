@@ -3,9 +3,7 @@
 /** @interface */
 const ITracker = require('../interfaces/i-tracker');
 
-const util = require('util');
 const probe = require('tcp-ping').probe;
-const request = require('request');
 
 /**
  * Abstract Tracker class
@@ -16,6 +14,10 @@ class AbstractTracker extends ITracker {
 	constructor() {
 		super();
 
+		if (this.constructor === AbstractTracker) {
+			throw new TypeError("Can not construct abstract class.");
+		}
+
 		/**
 		 * @type {string}
 		 * @protected
@@ -24,12 +26,11 @@ class AbstractTracker extends ITracker {
 	}
 
 	/**
-	 * TODO: Rework according to model 'request-response'
 	 * @inheritDoc
 	 */
 	doQuery(optParams) {
 		let params = /** @type {QueryParams} */ {};
-		params.query = optParams.query || 'comics';
+		params.query = optParams.query || '.cbr';
 		params.category = optParams.category || '';
 		params.maxItems = optParams.maxItems || 10;
 		params.order = optParams.order || '';
@@ -37,8 +38,14 @@ class AbstractTracker extends ITracker {
 
 		return new Promise((resolve, reject) => {
 			this._searchQueryRequest(params)
-				.then(queryResponse => {
-					resolve(queryResponse);
+				.then(responseData => {
+					this._createQueryResponse(responseData)
+						.then(queryResponse => {
+							resolve(queryResponse);
+						})
+						.catch(err => {
+							reject(err);
+						});
 				})
 				.catch(err => {
 					reject(err);
@@ -73,28 +80,6 @@ class AbstractTracker extends ITracker {
 	}
 
 	/**
-	 * @param {QueryParams} params
-	 * @return {Promise.<IQueryResponse|error>}
-	 * @protected
-	 */
-	_searchQueryRequest(params) {
-		let queryUrl = this._createQueryUrl(params);
-		request(queryUrl, (err, response, body) => {
-			if (err) {
-				return new Promise.reject(err);
-			} else {
-				this._createQueryResponse(body)
-					.then(queryResponse => {
-						return new Promise.resolve(queryResponse);
-					})
-					.reject(err => {
-						return new Promise.reject(err);
-					})
-			}
-		});
-	}
-
-	/**
 	 * @protected
 	 * @return {string}
 	 */
@@ -105,11 +90,12 @@ class AbstractTracker extends ITracker {
 
 	/**
 	 * @param {QueryParams} params
+	 * @return {Promise.<IQueryResponse|error>}
 	 * @abstract
 	 * @protected
 	 */
-	_createQueryUrl(params) {
-		throw new Error('Protected method _createQueryUrl is not implemented');
+	_searchQueryRequest(params) {
+		throw new TypeError('Abstracted method _searchQueryRequest is not implemented');
 	}
 
 	/**
@@ -119,7 +105,7 @@ class AbstractTracker extends ITracker {
 	 * @protected
 	 */
 	_createQueryResponse(responseData) {
-		throw new Error('Protected method _createQueryResponse is not implemented');
+		throw new TypeError('Abstract method _createQueryResponse is not implemented');
 	}
 }
 
