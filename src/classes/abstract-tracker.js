@@ -24,6 +24,7 @@ class AbstractTracker extends ITracker {
 	}
 
 	/**
+	 * TODO: Rework according to model 'request-response'
 	 * @inheritDoc
 	 */
 	doQuery(optParams) {
@@ -112,7 +113,7 @@ class AbstractTracker extends ITracker {
 	}
 
 	/**
-	 * @param {string} responseData
+	 * @param {*} responseData
 	 * @return {Promise.<IQueryResponse|error>}
 	 * @abstract
 	 * @protected
