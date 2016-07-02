@@ -5,11 +5,12 @@ const IQueryResponse = require('../interfaces/i-query-response');
 
 /**
  * Abstract QueryResponse class
+ * @param {*} responseData
  * @implements {IQueryResponse}
  * @extends {EventEmitter}
  */
 class AbstractQueryResponse extends IQueryResponse {
-	constructor() {
+	constructor(responseData) {
 		super();
 
 		/**
@@ -17,18 +18,30 @@ class AbstractQueryResponse extends IQueryResponse {
 		 * @protected
 		 */
 		this._torrents = [];
+
+		this._parseResponseData(responseData)
+			.then(torrents => {
+				this._torrents = torrents;
+				this.emit('init:complete', torrents);
+			})
+			.catch(err => {
+				this.emit('init:error', err);
+			});
 	}
 
 	/**
 	 * @inheritDoc
 	 */
 	sortByField(field) {
+		field = 'get' + field[0].toUpperCase() + field.substr(1);
 		return new Promise((resolve, reject) => {
 			try {
 				this._torrents.sort((torrentA, torrentB) => {
-					if (torrentA['_' + field] > torrentB['_' + field]) {
+					let fieldA = torrentA[field];
+					let fieldB = torrentB[field];
+					if (fieldA > fieldB) {
 						return 1;
-					} else if (torrentA['_' + field] < torrentB['_' + field]) {
+					} else if (fieldA < fieldB) {
 						return -1
 					} else {
 						return 0;
@@ -48,14 +61,11 @@ class AbstractQueryResponse extends IQueryResponse {
 		return new Promise((resolve, reject) => {
 			try {
 				var torrents = this._torrents.filter(torrent => {
-					let pass = true;
-					Object.keys(queryParams).forEach(field => {
+					let fields = Object.keys(queryParams);
+					return fields.every((field) => {
 						let torrentField = 'get' + field[0].toUpperCase() + field.substr(1);
-						if (queryParams[field] !== torrent[torrentField]()) {
-							pass = false;
-						}
+						return queryParams[field] === torrent[torrentField]();						return true;
 					});
-					return pass;
 				});
 			} catch(err) {
 				reject(err);
@@ -70,6 +80,18 @@ class AbstractQueryResponse extends IQueryResponse {
 	getItems() {
 		return this._torrents;
 	}
+
+	/**
+	 * This abstract method should overrides in all adapters
+	 * @param {*} data
+	 * @return {Promise.<error|Array.<ITorrent>>} torrents
+	 * @abstract
+	 * @protected
+	 */
+	_parseResponseData(data) {
+		throw Error('Protected method _parseResponseData is not implemented');
+	}
 }
+
 
 module.exports = AbstractQueryResponse;
