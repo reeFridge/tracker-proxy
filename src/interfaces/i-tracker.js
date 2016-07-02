@@ -3,10 +3,10 @@
 const EventEmitter = require('events');
 
 /**
- * Common torrent-tracker interface.
+ * Common torrent-tracker-adapter interface.
  * @interface
  */
-class ITracker extends EventEmitter {
+class ITrackerAdapter extends EventEmitter {
 	constructor() {
 		super();
 	}
@@ -49,4 +49,4 @@ class ITracker extends EventEmitter {
  */
 
 
-module.exports = ITracker;
+module.exports = ITrackerAdapter;
