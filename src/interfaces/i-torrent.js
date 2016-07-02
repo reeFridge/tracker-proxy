@@ -1,82 +1,103 @@
+'use strict';
 
-
+const EventEmitter = require('events');
 
 /**
  * Common Torrent interface
  * @interface
  */
-class ITorrent {
+class ITorrent extends EventEmitter {
+	constructor() {
+		super();
+	}
+
 	/**
 	 * Get torrent title
 	 * @return {string}
 	 */
-	getTitle() {}
+	getTitle() {
+		throw Error('Method "getTitle" is not implemented.');
+	}
 
 	/**
 	 * Get torrent page url
 	 * @return {string}
 	 */
-	getPageUrl() {}
+	getPageUrl() {
+		throw Error('Method "getPageUrl" is not implemented.');
+	}
 
 	/**
 	 * Get torrent file url
 	 * @return {string}
 	 */
-	getTorrentUrl() {}
+	getTorrentUrl() {
+		throw Error('Method "getTorrentUrl" is not implemented.');
+	}
 
 	/**
 	 * Get magnet uri
 	 * @return {string}
 	 */
-	getMagnet() {}
+	getMagnet() {
+		throw Error('Method "getMagnet" is not implemented.');
+	}
 
 	/**
 	 * Get torrent publication date
 	 * @return {Date}
 	 */
-	getPublicationDate() {}
-
-	/**
-	 * Get files count in the torrent
-	 * @return {number}
-	 */
-	getFilesCount() {}
+	getPublicationDate() {
+		throw Error('Method "getPublicDate" is not implemented.');
+	}
 
 	/**
 	 * Get array of files in the torrent
 	 * @return {Array.<File>}
 	 */
-	getFiles() {}
+	getFiles() {
+		throw Error('Method "getFiles" is not implemented.');
+	}
 
 	/**
 	 * Get peers count
 	 * @return {number}
 	 */
-	getPeers() {}
+	getPeers() {
+		throw Error('Method "getPeers" is not implemented.');
+	}
 
 	/**
-	 * Get leeches count
+	 * Get leechs count
 	 * @return {number}
 	 */
-	getLeechs() {}
+	getLeechs() {
+		throw Error('Method "getLeechs" is not implemented.');
+	}
 
 	/**
 	 * Get seeds count
 	 * @return {number}
 	 */
-	getSeeds() {}
+	getSeeds() {
+		throw Error('Method "getSeeds" is not implemented.');
+	}
 
 	/**
 	 * Get torrent hash
 	 * @return {string}
 	 */
-	getHash() {}
+	getHash() {
+		throw Error('Method "getHash" is not implemented.');
+	}
 
 	/**
 	 * Get size of all files included in torrent (in bytes)
 	 * @return {number}
 	 */
-	getSize() {}
+	getSize() {
+		throw Error('Method "getSize" is not implemented.');
+	}
 }
 
 
@@ -88,3 +109,6 @@ class ITorrent {
  *     path: string
  * }} File
  */
+
+
+module.exports = ITorrent;

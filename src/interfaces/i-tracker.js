@@ -1,29 +1,40 @@
+'use strict';
 
-
+const EventEmitter = require('events');
 
 /**
  * Common torrent-tracker interface.
  * @interface
  */
-class ITracker {
-  /**
-   * Search query.
-   * @param {QueryParams} [optParams]
-   * @return {Promise.<IQueryResponse|error>}
-   */
-  doQuery(optParams) {}
+class ITracker extends EventEmitter {
+	constructor() {
+		super();
+	}
 
-  /**
-   * Tracker availability check.
-   * @return {Promise.<undefined|error>}
-   */
-  isAvailable() {}
+	/**
+	 * Search query.
+	 * @param {QueryParams} optParams
+	 * @return {Promise.<IQueryResponse|error>}
+	 */
+	doQuery(optParams) {
+		throw Error('Method "doQuery" is not implemented.');
+	}
 
-  /**
-   * Getter for private tracker url variable.
-   * @return {string}
-   */
-  getUrl() {}
+	/**
+	 * Tracker availability check.
+	 * @return {Promise.<undefined|error>}
+	 */
+	isAvailable() {
+		throw Error('Method "isAvailable" is not implemented.');
+	}
+
+	/**
+	 * Getter for private tracker url variable.
+	 * @return {string}
+	 */
+	getUrl() {
+		throw Error('Method "getUrl" is not implemented.');
+	}
 }
 
 
@@ -36,3 +47,6 @@ class ITracker {
  *     desc: boolean
  * }} QueryParams
  */
+
+
+module.exports = ITracker;
