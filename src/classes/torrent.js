@@ -5,42 +5,43 @@ const ITorrent = require('../interfaces/i-torrent');
 
 /**
  * Common Torrent class
+ * @param {MetaData} metaData
  * @implements {ITorrent}
  * @extends {EventEmitter}
  */
 class Torrent extends ITorrent {
-	constructor() {
+	constructor(metaData) {
 		super();
 
 		/**
 		 * @type {string}
 		 * @protected
 		 */
-		this._title = '';
+		this._title = metaData.title || '';
 
 		/**
 		 * @type {string}
 		 * @protected
 		 */
-		this._pageUrl = '';
+		this._pageUrl = metaData.pageUrl || '';
 
 		/**
 		 * @type {string}
 		 * @protected
 		 */
-		this._torrentUrl = '';
+		this._torrentUrl = metaData.torrentUrl || '';
 
 		/**
 		 * @type {string}
 		 * @protected
 		 */
-		this._magnet = '';
+		this._magnet = metaData.magnet || '';
 
 		/**
 		 * @type {Date}
 		 * @protected
 		 */
-		this._publicationDate = new Date();
+		this._publicationDate = metaData.publicationDate || new Date();
 
 		/**
 		 * @type {Array.<File>}
@@ -52,31 +53,31 @@ class Torrent extends ITorrent {
 		 * @type {number}
 		 * @protected
 		 */
-		this._peers = 0;
+		this._peers = metaData.peers || 0;
 
 		/**
 		 * @type {number}
 		 * @protected
 		 */
-		this._leechs = 0;
+		this._leechs = metaData.leechs || 0;
 
 		/**
 		 * @type {number}
 		 * @protected
 		 */
-		this._seeds = 0;
+		this._seeds = metaData.seeds || 0;
 
 		/**
 		 * @type {string}
 		 * @protected
 		 */
-		this._hash = '';
+		this._hash = metaData.hash || '';
 
 		/**
 		 * @type {number}
 		 * @protected
 		 */
-		this._size = '';
+		this._size = metaData.size || '';
 	}
 
 	/**
@@ -157,6 +158,22 @@ class Torrent extends ITorrent {
 		return this._size;
 	}
 }
+
+
+/**
+ * @typedef {{
+ *     title: string,
+ *     pageUrl: string,
+ *     torrentUrl: string,
+ *     magnet: string,
+ *     publicationDate: Date,
+ *     peers: number,
+ *     leechs: number,
+ *     seeds: number,
+ *     hash: string,
+ *     size: number
+ * }} MetaData
+ */
 
 
 module.exports = Torrent;
