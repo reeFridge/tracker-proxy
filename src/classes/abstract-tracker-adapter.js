@@ -1,16 +1,16 @@
 'use strict';
 
 /** @interface */
-const ITracker = require('../interfaces/i-tracker');
+const ITrackerAdapter = require('../interfaces/i-tracker-adapter');
 
 const probe = require('tcp-ping').probe;
 
 /**
  * Abstract Tracker Adapter class
- * @implements {ITracker}
+ * @implements {ITrackerAdapter}
  * @extends {EventEmitter}
  */
-class AbstractTrackerAdapter extends ITracker {
+class AbstractTrackerAdapter extends ITrackerAdapter {
 	constructor() {
 		super();
 
