@@ -38,6 +38,3 @@ jspm_packages
 
 # IDEA Environment
 .idea
-
-# ESDoc output
-.esdoc
