@@ -1,20 +1,20 @@
 'use strict';
 
 /** @interface */
-const ITracker = require('../interfaces/i-tracker');
+const ITrackerAdapter = require('../interfaces/i-tracker-adapter');
 
 const probe = require('tcp-ping').probe;
 
 /**
- * Abstract Tracker class
- * @implements {ITracker}
+ * Abstract Tracker Adapter class
+ * @implements {ITrackerAdapter}
  * @extends {EventEmitter}
  */
-class AbstractTracker extends ITracker {
+class AbstractTrackerAdapter extends ITrackerAdapter {
 	constructor() {
 		super();
 
-		if (this.constructor === AbstractTracker) {
+		if (this.constructor === AbstractTrackerAdapter) {
 			throw new TypeError("Can not construct abstract class.");
 		}
 
@@ -110,4 +110,4 @@ class AbstractTracker extends ITracker {
 }
 
 
-module.exports = AbstractTracker;
+module.exports = AbstractTrackerAdapter;
