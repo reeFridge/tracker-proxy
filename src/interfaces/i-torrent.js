@@ -9,6 +9,10 @@ const EventEmitter = require('events');
 class ITorrent extends EventEmitter {
 	constructor() {
 		super();
+
+		if (this.constructor === ITorrent) {
+			throw new TypeError('Can not create new instance of interface');
+		}
 	}
 
 	/**
@@ -16,7 +20,7 @@ class ITorrent extends EventEmitter {
 	 * @return {string}
 	 */
 	get title() {
-		throw Error('Method "getTitle" is not implemented.');
+		throw new TypeError('Method "getTitle" is not implemented.');
 	}
 
 	/**
@@ -24,7 +28,7 @@ class ITorrent extends EventEmitter {
 	 * @return {string}
 	 */
 	get pageUrl() {
-		throw Error('Method "getPageUrl" is not implemented.');
+		throw new TypeError('Method "getPageUrl" is not implemented.');
 	}
 
 	/**
@@ -32,7 +36,7 @@ class ITorrent extends EventEmitter {
 	 * @return {string}
 	 */
 	get torrentUrl() {
-		throw Error('Method "getTorrentUrl" is not implemented.');
+		throw new TypeError('Method "getTorrentUrl" is not implemented.');
 	}
 
 	/**
@@ -40,7 +44,7 @@ class ITorrent extends EventEmitter {
 	 * @return {string}
 	 */
 	get magnet() {
-		throw Error('Method "getMagnet" is not implemented.');
+		throw new TypeError('Method "getMagnet" is not implemented.');
 	}
 
 	/**
@@ -48,7 +52,7 @@ class ITorrent extends EventEmitter {
 	 * @return {Date}
 	 */
 	get publicationDate() {
-		throw Error('Method "getPublicDate" is not implemented.');
+		throw new TypeError('Method "getPublicDate" is not implemented.');
 	}
 
 	/**
@@ -56,7 +60,7 @@ class ITorrent extends EventEmitter {
 	 * @return {Array.<File>}
 	 */
 	get files() {
-		throw Error('Method "getFiles" is not implemented.');
+		throw new TypeError('Method "getFiles" is not implemented.');
 	}
 
 	/**
@@ -64,7 +68,7 @@ class ITorrent extends EventEmitter {
 	 * @return {number}
 	 */
 	get peers() {
-		throw Error('Method "getPeers" is not implemented.');
+		throw new TypeError('Method "getPeers" is not implemented.');
 	}
 
 	/**
@@ -72,7 +76,7 @@ class ITorrent extends EventEmitter {
 	 * @return {number}
 	 */
 	get leechs() {
-		throw Error('Method "getLeechs" is not implemented.');
+		throw new TypeError('Method "getLeechs" is not implemented.');
 	}
 
 	/**
@@ -80,7 +84,7 @@ class ITorrent extends EventEmitter {
 	 * @return {number}
 	 */
 	get seeds() {
-		throw Error('Method "getSeeds" is not implemented.');
+		throw new TypeError('Method "getSeeds" is not implemented.');
 	}
 
 	/**
@@ -88,7 +92,7 @@ class ITorrent extends EventEmitter {
 	 * @return {string}
 	 */
 	get hash() {
-		throw Error('Method "getHash" is not implemented.');
+		throw new TypeError('Method "getHash" is not implemented.');
 	}
 
 	/**
@@ -96,7 +100,7 @@ class ITorrent extends EventEmitter {
 	 * @return {number}
 	 */
 	get size() {
-		throw Error('Method "getSize" is not implemented.');
+		throw new TypeError('Method "getSize" is not implemented.');
 	}
 }
 

@@ -19,6 +19,10 @@ class AbstractQueryResponse extends IQueryResponse {
 		 */
 		this._torrents = [];
 
+		if (this.constructor === AbstractQueryResponse) {
+			throw new TypeError("Can not construct abstract class.");
+		}
+
 		this._parseResponseData(responseData)
 			.then(torrents => {
 				this._torrents = torrents;
@@ -87,7 +91,7 @@ class AbstractQueryResponse extends IQueryResponse {
 	 * @protected
 	 */
 	_parseResponseData(data) {
-		throw Error('Protected method _parseResponseData is not implemented');
+		throw new TypeError('Protected method _parseResponseData is not implemented');
 	}
 }
 

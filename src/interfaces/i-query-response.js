@@ -9,6 +9,10 @@ const EventEmitter = require('events');
 class IQueryResponse extends EventEmitter {
 	constructor() {
 		super();
+
+		if (this.constructor === IQueryResponse) {
+			throw new TypeError('Can not create new instance of interface');
+		}
 	}
 
 	/**
@@ -17,7 +21,7 @@ class IQueryResponse extends EventEmitter {
 	 * @return {Promise.<error|undefined>}
 	 */
 	sortByField(field) {
-		throw Error('Method "sortByField" is not implemented.');
+		throw new TypeError('Method "sortByField" is not implemented.');
 	}
 
 	/**
@@ -26,7 +30,7 @@ class IQueryResponse extends EventEmitter {
 	 * @return {Promise.<IQueryResponse|error>}
 	 */
 	filter(optParams) {
-		throw Error('Method "doQuery" is not implemented.');
+		throw new TypeError('Method "doQuery" is not implemented.');
 	}
 
 	/**
@@ -34,7 +38,7 @@ class IQueryResponse extends EventEmitter {
 	 * @return {Array.<ITorrent>}
 	 */
 	getItems() {
-		throw Error('Method "getItems" is not implemented.');
+		throw new TypeError('Method "getItems" is not implemented.');
 	}
 }
 
