@@ -1,6 +1,6 @@
 {
   "name": "tracker-proxy",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "This package provides one intrface for work with different torrent trackers.",
   "main": "index.js",
   "scripts": {
@@ -22,8 +22,9 @@
   },
   "homepage": "https://github.com/reeFridge/tracker-proxy#readme",
   "devDependencies": {
-    "eslint": "^2.13.0",
-    "eslint-config-airbnb-base": "^3.0.1",
-    "eslint-plugin-import": "^1.8.1"
+  },
+  "dependencies": {
+    "request": "^2.72.0",
+    "tcp-ping": "^0.1.1"
   }
 }
