@@ -22,7 +22,7 @@ class IQueryResponse extends EventEmitter {
 
 	/**
 	 * Do search query between items from this response
-	 * @param {QueryParams} [optParams]
+	 * @param {QueryParams=} optParams
 	 * @return {Promise.<IQueryResponse|error>}
 	 */
 	filter(optParams) {

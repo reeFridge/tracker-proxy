@@ -33,7 +33,6 @@ class AbstractQueryResponse extends IQueryResponse {
 	 * @inheritDoc
 	 */
 	sortByField(field) {
-		field = 'get' + field[0].toUpperCase() + field.substr(1);
 		return new Promise((resolve, reject) => {
 			try {
 				this._torrents.sort((torrentA, torrentB) => {
@@ -63,8 +62,7 @@ class AbstractQueryResponse extends IQueryResponse {
 				var torrents = this._torrents.filter(torrent => {
 					let fields = Object.keys(queryParams);
 					return fields.every((field) => {
-						let torrentField = 'get' + field[0].toUpperCase() + field.substr(1);
-						return queryParams[field] === torrent[torrentField]();						return true;
+						return queryParams[field] === torrent[field];
 					});
 				});
 			} catch(err) {
