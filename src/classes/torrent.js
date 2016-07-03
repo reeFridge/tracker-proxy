@@ -83,42 +83,42 @@ class Torrent extends ITorrent {
 	/**
 	 * @inheritDoc
 	 */
-	getTitle() {
+	get title() {
 		return this._title;
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	getPageUrl() {
+	get pageUrl() {
 		return this._pageUrl;
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	getTorrentUrl() {
+	get torrentUrl() {
 		return this._torrentUrl;
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	getMagnet() {
+	get magnet() {
 		return this._magnet;
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	getPublicationDate() {
+	get publicationDate() {
 		return this._publicationDate;
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	getFiles() {
+	get files() {
 		//TODO: Get files and folders in torrent on demand
 		return this._files;
 	}
@@ -126,35 +126,35 @@ class Torrent extends ITorrent {
 	/**
 	 * @inheritDoc
 	 */
-	getPeers() {
+	get peers() {
 		return this._peers;
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	getLeechs() {
+	get leechs() {
 		return this._leechs;
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	getSeeds() {
+	get seeds() {
 		return this._seeds;
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	getHash() {
+	get hash() {
 		return this._hash;
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	getSize() {
+	get size() {
 		return this._size;
 	}
 }
