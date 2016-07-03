@@ -15,7 +15,7 @@ class ITorrent extends EventEmitter {
 	 * Get torrent title
 	 * @return {string}
 	 */
-	getTitle() {
+	get title() {
 		throw Error('Method "getTitle" is not implemented.');
 	}
 
@@ -23,7 +23,7 @@ class ITorrent extends EventEmitter {
 	 * Get torrent page url
 	 * @return {string}
 	 */
-	getPageUrl() {
+	get pageUrl() {
 		throw Error('Method "getPageUrl" is not implemented.');
 	}
 
@@ -31,7 +31,7 @@ class ITorrent extends EventEmitter {
 	 * Get torrent file url
 	 * @return {string}
 	 */
-	getTorrentUrl() {
+	get torrentUrl() {
 		throw Error('Method "getTorrentUrl" is not implemented.');
 	}
 
@@ -39,7 +39,7 @@ class ITorrent extends EventEmitter {
 	 * Get magnet uri
 	 * @return {string}
 	 */
-	getMagnet() {
+	get magnet() {
 		throw Error('Method "getMagnet" is not implemented.');
 	}
 
@@ -47,7 +47,7 @@ class ITorrent extends EventEmitter {
 	 * Get torrent publication date
 	 * @return {Date}
 	 */
-	getPublicationDate() {
+	get publicationDate() {
 		throw Error('Method "getPublicDate" is not implemented.');
 	}
 
@@ -55,7 +55,7 @@ class ITorrent extends EventEmitter {
 	 * Get array of files in the torrent
 	 * @return {Array.<File>}
 	 */
-	getFiles() {
+	get files() {
 		throw Error('Method "getFiles" is not implemented.');
 	}
 
@@ -63,7 +63,7 @@ class ITorrent extends EventEmitter {
 	 * Get peers count
 	 * @return {number}
 	 */
-	getPeers() {
+	get peers() {
 		throw Error('Method "getPeers" is not implemented.');
 	}
 
@@ -71,7 +71,7 @@ class ITorrent extends EventEmitter {
 	 * Get leechs count
 	 * @return {number}
 	 */
-	getLeechs() {
+	get leechs() {
 		throw Error('Method "getLeechs" is not implemented.');
 	}
 
@@ -79,7 +79,7 @@ class ITorrent extends EventEmitter {
 	 * Get seeds count
 	 * @return {number}
 	 */
-	getSeeds() {
+	get seeds() {
 		throw Error('Method "getSeeds" is not implemented.');
 	}
 
@@ -87,7 +87,7 @@ class ITorrent extends EventEmitter {
 	 * Get torrent hash
 	 * @return {string}
 	 */
-	getHash() {
+	get hash() {
 		throw Error('Method "getHash" is not implemented.');
 	}
 
@@ -95,7 +95,7 @@ class ITorrent extends EventEmitter {
 	 * Get size of all files included in torrent (in bytes)
 	 * @return {number}
 	 */
-	getSize() {
+	get size() {
 		throw Error('Method "getSize" is not implemented.');
 	}
 }
