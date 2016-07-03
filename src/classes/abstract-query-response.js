@@ -26,7 +26,7 @@ class AbstractQueryResponse extends IQueryResponse {
 		this._parseResponseData(responseData)
 			.then(torrents => {
 				this._torrents = torrents;
-				this.emit('init:complete', torrents);
+				this.emit('init:complete', this);
 			})
 			.catch(err => {
 				this.emit('init:error', err);
