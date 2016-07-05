@@ -2,7 +2,7 @@
 
 const AbstractTrackerAdapter = require('../../../classes/abstract-tracker-adapter');
 const QueryResponse = require('./query-response');
-const kickAss = require('kat-cr');
+const kickAssTorrent = require('kat-cr');
 
 /**
  * KickAssTorrent adapter
@@ -12,6 +12,7 @@ class TrackerAdapter extends AbstractTrackerAdapter {
 		super();
 
 		this._url = 'http://kat.cr';
+		this._adaptee = kickAssTorrent;
 	}
 
 	/**
@@ -19,7 +20,7 @@ class TrackerAdapter extends AbstractTrackerAdapter {
 	 */
 	_searchQueryRequest(params) {
 		return new Promise((resolve, reject) => {
-			kickAss({
+			this._adaptee({
 				search: params.query,
 				page: 1
 			}).then(results => {

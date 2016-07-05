@@ -23,6 +23,13 @@ class AbstractTrackerAdapter extends ITrackerAdapter {
 		 * @protected
 		 */
 		this._url = '';
+
+		/**
+		 * Object that is converted to another class
+		 * @type {function(*)}
+		 * @protected
+		 */
+		this._adaptee = null;
 	}
 
 	/**
