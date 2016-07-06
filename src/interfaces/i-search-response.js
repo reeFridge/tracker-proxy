@@ -3,7 +3,7 @@
 const EventEmitter = require('events');
 
 /**
- * Common QueryResponse interface
+ * Common SearchResponse interface
  * @interface
  */
 class ISearchResponse extends EventEmitter {
