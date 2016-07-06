@@ -1,16 +1,20 @@
 'use strict';
 
 /** @interface */
-const IQueryResponse = require('../interfaces/i-query-response');
+const ISearchResponse = require('../interfaces/i-search-response');
 
 /**
- * Abstract QueryResponse class
+ * Abstract SearchResponse class
  * @param {*} responseData
- * @implements {IQueryResponse}
+ * @implements {ISearchResponse}
  * @extends {EventEmitter}
  */
-class AbstractQueryResponse extends IQueryResponse {
+class AbstractSearchResponse extends ISearchResponse {
 	constructor(responseData) {
+		if (this.constructor === AbstractSearchResponse) {
+			throw new TypeError("Can not construct abstract class.");
+		}
+
 		super();
 
 		/**
@@ -19,17 +23,32 @@ class AbstractQueryResponse extends IQueryResponse {
 		 */
 		this._torrents = [];
 
-		if (this.constructor === AbstractQueryResponse) {
-			throw new TypeError("Can not construct abstract class.");
-		}
+		/**
+		 * Fired without args
+		 * @type {string}
+		 */
+		this.EVENT_INIT_START = 'init:start';
 
+		/**
+		 * Fired without args
+		 * @type {string}
+		 */
+		this.EVENT_INIT_COMPLETE = 'init:complete';
+
+		/**
+		 * Fired with: initialization error
+		 * @type {string}
+		 */
+		this.EVENT_INIT_ERROR = 'init:error';
+
+		this.emit(this.EVENT_INIT_START);
 		this._parseResponseData(responseData)
 			.then(torrents => {
 				this._torrents = torrents;
-				this.emit('init:complete', this);
+				this.emit(this.EVENT_INIT_COMPLETE);
 			})
 			.catch(err => {
-				this.emit('init:error', err);
+				this.emit(this.EVENT_INIT_ERROR, err);
 			});
 	}
 
@@ -79,21 +98,20 @@ class AbstractQueryResponse extends IQueryResponse {
 	/**
 	 * @inheritDoc
 	 */
-	getItems() {
+	getTorrents() {
 		return this._torrents;
 	}
 
 	/**
-	 * This abstract method should overrides in all adapters
 	 * @param {*} data
 	 * @return {Promise.<error|Array.<ITorrent>>} torrents
 	 * @abstract
 	 * @protected
 	 */
 	_parseResponseData(data) {
-		throw new TypeError('Protected method _parseResponseData is not implemented');
+		throw new TypeError('Abstract method "_parseResponseData" is not implemented');
 	}
 }
 
 
-module.exports = AbstractQueryResponse;
+module.exports = AbstractSearchResponse;
