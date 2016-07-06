@@ -6,11 +6,11 @@ const EventEmitter = require('events');
  * Common QueryResponse interface
  * @interface
  */
-class IQueryResponse extends EventEmitter {
+class ISearchResponse extends EventEmitter {
 	constructor() {
 		super();
 
-		if (this.constructor === IQueryResponse) {
+		if (this.constructor === ISearchResponse) {
 			throw new TypeError('Can not create new instance of interface');
 		}
 	}
@@ -27,7 +27,7 @@ class IQueryResponse extends EventEmitter {
 	/**
 	 * Do search query between items from this response
 	 * @param {QueryParams=} optParams
-	 * @return {Promise.<IQueryResponse|error>}
+	 * @return {Promise.<ISearchResponse|error>}
 	 */
 	filter(optParams) {
 		throw new TypeError('Method "doQuery" is not implemented.');
@@ -43,4 +43,4 @@ class IQueryResponse extends EventEmitter {
 }
 
 
-module.exports = IQueryResponse;
+module.exports = ISearchResponse;
