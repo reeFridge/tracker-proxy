@@ -37,7 +37,7 @@ class ISearchResponse extends EventEmitter {
 	 * Get array of torrent items in response
 	 * @return {Array.<ITorrent>}
 	 */
-	getItems() {
+	getTorrents() {
 		throw new TypeError('Method "getItems" is not implemented.');
 	}
 }
