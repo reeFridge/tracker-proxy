@@ -30,7 +30,7 @@ class ISearchResponse extends EventEmitter {
 	 * @return {Promise.<ISearchResponse|error>}
 	 */
 	filter(optParams) {
-		throw new TypeError('Method "doQuery" is not implemented.');
+		throw new TypeError('Method "filter" is not implemented.');
 	}
 
 	/**
