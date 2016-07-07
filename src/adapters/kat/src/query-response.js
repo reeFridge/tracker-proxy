@@ -1,11 +1,11 @@
 'use strict';
 
-const AbstractQueryResponse = require('../../../classes/abstract-query-response');
+const AbstractSearchResponse = require('../../../classes/abstract-search-response');
 const Torrent = require('../../../classes/torrent');
 
-class QueryResponse extends AbstractQueryResponse {
-	constructor(responseData) {
-		super(responseData);
+class SearchResponse extends AbstractSearchResponse {
+	constructor() {
+		super();
 	}
 
 	/**
@@ -38,4 +38,4 @@ class QueryResponse extends AbstractQueryResponse {
 }
 
 
-module.exports = QueryResponse;
+module.exports = SearchResponse;
