@@ -21,10 +21,10 @@
     "url": "https://github.com/reeFridge/tracker-proxy/issues"
   },
   "homepage": "https://github.com/reeFridge/tracker-proxy#readme",
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "dependencies": {
-    "request": "^2.72.0",
-    "tcp-ping": "^0.1.1"
+    "kat-cr": "^0.1.19",
+    "tcp-ping": "^0.1.1",
+    "tortuga": "^0.1.1"
   }
 }

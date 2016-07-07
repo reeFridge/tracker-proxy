@@ -3,25 +3,25 @@
 const EventEmitter = require('events');
 
 /**
- * Common torrent-tracker-adapter interface.
+ * Common torrent-tracker interface.
  * @interface
  */
-class ITrackerAdapter extends EventEmitter {
+class ITracker extends EventEmitter {
 	constructor() {
 		super();
 
-		if (this.constructor === ITrackerAdapter) {
+		if (this.constructor === ITracker) {
 			throw new TypeError('Can not create new instance of interface');
 		}
 	}
 
 	/**
 	 * Search query.
-	 * @param {QueryParams} optParams
-	 * @return {Promise.<IQueryResponse|error>}
+	 * @param {SearchParams} optParams
+	 * @return {Promise.<Array.<ITorrent>|error>}
 	 */
-	doQuery(optParams) {
-		throw new TypeError('Method "doQuery" is not implemented.');
+	search(optParams) {
+		throw new TypeError('Method "search" is not implemented.');
 	}
 
 	/**
@@ -45,12 +45,11 @@ class ITrackerAdapter extends EventEmitter {
 /**
  * @typedef {{
  *     query: string,
- *     category: string,
  *     maxItems: number,
  *     order: string,
  *     desc: boolean
- * }} QueryParams
+ * }} SearchParams
  */
 
 
-module.exports = ITrackerAdapter;
+module.exports = ITracker;
