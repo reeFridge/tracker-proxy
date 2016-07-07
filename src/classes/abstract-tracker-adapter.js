@@ -1,16 +1,16 @@
 'use strict';
 
 /** @interface */
-const ITrackerAdapter = require('../interfaces/i-tracker-adapter');
+const ITracker = require('../interfaces/i-tracker');
 
 const probe = require('tcp-ping').probe;
 
 /**
  * Abstract Tracker Adapter class
- * @implements {ITrackerAdapter}
+ * @implements {ITracker}
  * @extends {EventEmitter}
  */
-class AbstractTrackerAdapter extends ITrackerAdapter {
+class AbstractTrackerAdapter extends ITracker {
 	constructor() {
 		super();
 
@@ -23,25 +23,43 @@ class AbstractTrackerAdapter extends ITrackerAdapter {
 		 * @protected
 		 */
 		this._url = '';
+
+		/**
+		 * Object that is converted to another class
+		 * @type {function(*)}
+		 * @protected
+		 */
+		this._adaptee = null;
+
+		/**
+		 * @type {ISearchResponse}
+		 * @protected
+		 */
+		this._searchResponse = null;
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	doQuery(optParams) {
-		let params = /** @type {QueryParams} */ {};
-		params.query = optParams.query || '.cbr';
-		params.category = optParams.category || '';
+	search(optParams) {
+		let params = /** @type {SearchParams} */ {};
+		params.query = optParams.query || 'cbr';
 		params.maxItems = optParams.maxItems || 10;
 		params.order = optParams.order || '';
-		params.desc = optParams.category || false;
+		params.desc = optParams.desc || false;
 
 		return new Promise((resolve, reject) => {
-			this._searchQueryRequest(params)
-				.then(responseData => {
-					this._createQueryResponse(responseData)
-						.then(queryResponse => {
-							resolve(queryResponse);
+			this.isAvailable()
+				.then(() => {
+					this._searchRequest(params.query)
+						.then(responseData => {
+							this._normalizeSearchResponse(responseData, params)
+								.then(torrents => {
+									resolve(torrents);
+								})
+								.catch(err => {
+									reject(err);
+								});
 						})
 						.catch(err => {
 							reject(err);
@@ -72,7 +90,7 @@ class AbstractTrackerAdapter extends ITrackerAdapter {
 					if (avail) {
 						resolve();
 					} else {
-						reject();
+						reject(new Error('Tracker is not available now'));
 					}
 				}
 			})
@@ -89,23 +107,33 @@ class AbstractTrackerAdapter extends ITrackerAdapter {
 	}
 
 	/**
-	 * @param {QueryParams} params
-	 * @return {Promise.<IQueryResponse|error>}
+	 * @param {*} responseData
+	 * @param {SearchParams} params
+	 * @return {Promise.<Array.<ITorrent>|error>}
 	 * @abstract
 	 * @protected
 	 */
-	_searchQueryRequest(params) {
-		throw new TypeError('Abstracted method _searchQueryRequest is not implemented');
+	_normalizeSearchResponse(responseData, params) {
+		return new Promise((resolve, reject) => {
+			this._searchResponse.uninit();
+			this._searchResponse.init(responseData, params)
+				.then(() => {
+					resolve(this._searchResponse.getTorrents());
+				})
+				.catch(err => {
+					reject(err);
+				});
+		});
 	}
 
 	/**
-	 * @param {*} responseData
-	 * @return {Promise.<IQueryResponse|error>}
+	 * @param {string} queryString
+	 * @return {Promise.<*|error>}
 	 * @abstract
 	 * @protected
 	 */
-	_createQueryResponse(responseData) {
-		throw new TypeError('Abstract method _createQueryResponse is not implemented');
+	_searchRequest(queryString) {
+		throw new TypeError('Abstracted method _searchRequest is not implemented');
 	}
 }
 
