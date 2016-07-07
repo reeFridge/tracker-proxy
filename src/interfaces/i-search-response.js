@@ -16,21 +16,16 @@ class ISearchResponse extends EventEmitter {
 	}
 
 	/**
-	 * Sort items by field
-	 * @param {string} field
-	 * @return {Promise.<error|undefined>}
+	 * @param {*} responseData
+	 * @param {SearchParams} searchParams
+	 * @return {Promise.<undefined|error>}
 	 */
-	sortByField(field) {
-		throw new TypeError('Method "sortByField" is not implemented.');
+	init(responseData, searchParams) {
+		throw new TypeError('Method "init" is not implemented.');
 	}
 
-	/**
-	 * Do search query between items from this response
-	 * @param {QueryParams=} optParams
-	 * @return {Promise.<ISearchResponse|error>}
-	 */
-	filter(optParams) {
-		throw new TypeError('Method "filter" is not implemented.');
+	uninit() {
+		throw new TypeError('Method "uninit" is not implemented.');
 	}
 
 	/**
