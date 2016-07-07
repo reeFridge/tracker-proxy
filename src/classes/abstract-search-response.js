@@ -10,11 +10,11 @@ const ISearchResponse = require('../interfaces/i-search-response');
  */
 class AbstractSearchResponse extends ISearchResponse {
 	constructor() {
+		super();
+
 		if (this.constructor === AbstractSearchResponse) {
 			throw new TypeError("Can not construct abstract class.");
 		}
-
-		super();
 
 		/**
 		 * @type {Array.<ITorrent>}
