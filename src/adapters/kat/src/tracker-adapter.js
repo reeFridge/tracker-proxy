@@ -1,7 +1,7 @@
 'use strict';
 
 const AbstractTrackerAdapter = require('../../../classes/abstract-tracker-adapter');
-const SearchResponse = require('./query-response');
+const SearchResponse = require('./search-response');
 const kickAssTorrent = require('kat-cr');
 
 /**
