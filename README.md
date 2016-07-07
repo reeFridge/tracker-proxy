@@ -1,6 +1,6 @@
-# tracker-proxy
+# Tracker Proxy
 
-## Description  
+## Description
 
 This package provide one interface which can be used for working with many differ torrent-trackers as like as one.
 
@@ -8,10 +8,15 @@ This package provide one interface which can be used for working with many diffe
 
 - One interface
 - Simple usage
-- Can using user-write tracker adapters
+- Can using user-write tracker adapters (soon)
 - Flexibility
-- Use ES6 features
-- Test coverage
+- ES6
+
+## Installation
+
+```
+npm install --save tracker-proxy
+```
 
 ## Usage
 
@@ -35,5 +40,6 @@ tracker.on('ready', function() {
 
 ## TODO
 
-- Add full interface description
-- Add more usage example
+- Full test coverage
+- More adapters for different tracker
+- Add full interface description to README
