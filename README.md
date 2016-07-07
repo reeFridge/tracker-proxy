@@ -8,11 +8,10 @@ This package provide one interface which can be used for working with many diffe
 
 - One interface
 - Simple usage
-- Can using user-write tracker adapters (soon)
 - Flexibility
 - ES6
 
-## Installation
+## Install
 
 ```
 npm install --save tracker-proxy
@@ -35,7 +34,7 @@ trackerManager.on(trackerManager.EVENT_SEARCH_RESPONSE, (tracker, torrents) => {
 	});
 });
 
-trackerManager.search({ query: query }); // PROFIT!
+trackerManager.search({ query: 'selenium' }); // PROFIT!
 ```
 
 ## TODO
@@ -43,3 +42,4 @@ trackerManager.search({ query: query }); // PROFIT!
 - Full test coverage
 - More adapters for different tracker
 - Add full interface description to README
+- More options for search
