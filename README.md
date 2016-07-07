@@ -21,21 +21,21 @@ npm install --save tracker-proxy
 ## Usage
 
 ```javascript
-const Tracker = require('tracker-proxy');
-const yourTrackerAdapter = require('./your-tracker-adapter');
-let tracker = new Tracker();
-tracker.include(yourTrackerAdapter);
-let searchResponse = [];
+const trackerProxy = require('tracker-proxy');
 
-tracker.on('ready', function() {
-    tracker.search('X-Weapon')
-        .then(function(response) {
-            searchResponse = response;
-        })
-        .catch(function(err) {
-            throw err;
-        });
+let trackerManager = new trackerProxy.Manager();
+
+trackerManager.include(new trackerProxy.adapters.KAT());
+trackerManager.include(new trackerProxy.adapters.TPB());
+
+trackerManager.on(trackerManager.EVENT_SEARCH_RESPONSE, (tracker, torrents) => {
+	console.log(`Tracker ${tracker.getUrl()} search response:`);
+	torrents.forEach(torrent => {
+		console.log(`\t${torrent.title}`);
+	});
 });
+
+trackerManager.search({ query: query }); // PROFIT!
 ```
 
 ## TODO
