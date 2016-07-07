@@ -24,7 +24,7 @@
   "devDependencies": {},
   "dependencies": {
     "kat-cr": "^0.1.19",
-    "request": "^2.72.0",
-    "tcp-ping": "^0.1.1"
+    "tcp-ping": "^0.1.1",
+    "tortuga": "^0.1.1"
   }
 }
