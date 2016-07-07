@@ -5,12 +5,11 @@ const ISearchResponse = require('../interfaces/i-search-response');
 
 /**
  * Abstract SearchResponse class
- * @param {*} responseData
  * @implements {ISearchResponse}
  * @extends {EventEmitter}
  */
 class AbstractSearchResponse extends ISearchResponse {
-	constructor(responseData) {
+	constructor() {
 		if (this.constructor === AbstractSearchResponse) {
 			throw new TypeError("Can not construct abstract class.");
 		}
@@ -24,38 +23,53 @@ class AbstractSearchResponse extends ISearchResponse {
 		this._torrents = [];
 
 		/**
-		 * Fired without args
-		 * @type {string}
+		 * @type {*}
+		 * @protected
 		 */
-		this.EVENT_INIT_START = 'init:start';
+		this._responseData = null;
 
 		/**
-		 * Fired without args
-		 * @type {string}
+		 * @type {SearchParams}
+		 * @protected
 		 */
-		this.EVENT_INIT_COMPLETE = 'init:complete';
+		this._searchParams = null;
+	}
 
-		/**
-		 * Fired with: initialization error
-		 * @type {string}
-		 */
-		this.EVENT_INIT_ERROR = 'init:error';
+	init(responseData, params) {
+		this._responseData = responseData;
+		this._searchParams = params;
+		return new Promise((resolve, reject) => {
+			this._parseResponseData(this._responseData)
+				.then(torrents => {
+					// TODO: Filtering by searchParams
+					this._torrents = torrents;
+					resolve();
+				})
+				.catch(err => {
+					reject(err);
+				});
+		});
+	}
 
-		this.emit(this.EVENT_INIT_START);
-		this._parseResponseData(responseData)
-			.then(torrents => {
-				this._torrents = torrents;
-				this.emit(this.EVENT_INIT_COMPLETE);
-			})
-			.catch(err => {
-				this.emit(this.EVENT_INIT_ERROR, err);
-			});
+	uninit() {
+		this._responseData = null;
+		this._torrents = [];
+		this._searchParams = null;
 	}
 
 	/**
 	 * @inheritDoc
 	 */
-	sortByField(field) {
+	getTorrents() {
+		return this._torrents;
+	}
+
+	/**
+	 * Sort items by field
+	 * @param {string} field
+	 * @return {Promise.<error|undefined>}
+	 */
+	_sortByField(field) {
 		return new Promise((resolve, reject) => {
 			try {
 				this._torrents.sort((torrentA, torrentB) => {
@@ -77,15 +91,16 @@ class AbstractSearchResponse extends ISearchResponse {
 	}
 
 	/**
-	 * @inheritDoc
+	 * Do search query between items from this response
+	 * @return {Promise.<Array.<ITorrent>|error>}
 	 */
-	filter(queryParams) {
+	_filter() {
 		return new Promise((resolve, reject) => {
 			try {
 				var torrents = this._torrents.filter(torrent => {
-					let fields = Object.keys(queryParams);
+					let fields = Object.keys(this._searchParams);
 					return fields.every((field) => {
-						return queryParams[field] === torrent[field];
+						return this._searchParams[field] === torrent[field];
 					});
 				});
 			} catch(err) {
@@ -96,17 +111,9 @@ class AbstractSearchResponse extends ISearchResponse {
 	}
 
 	/**
-	 * @inheritDoc
-	 */
-	getTorrents() {
-		return this._torrents;
-	}
-
-	/**
 	 * @param {*} data
-	 * @return {Promise.<error|Array.<ITorrent>>} torrents
+	 * @return {Promise.<Array.<ITorrent>|error>} torrents
 	 * @abstract
-	 * @protected
 	 */
 	_parseResponseData(data) {
 		throw new TypeError('Abstract method "_parseResponseData" is not implemented');
