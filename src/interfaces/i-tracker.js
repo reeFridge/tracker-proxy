@@ -17,8 +17,8 @@ class ITracker extends EventEmitter {
 
 	/**
 	 * Search query.
-	 * @param {QueryParams} optParams
-	 * @return {Promise.<ISearchResponse|error>}
+	 * @param {SearchParams} optParams
+	 * @return {Promise.<Array.<ITorrent>|error>}
 	 */
 	search(optParams) {
 		throw new TypeError('Method "search" is not implemented.');
@@ -48,7 +48,7 @@ class ITracker extends EventEmitter {
  *     maxItems: number,
  *     order: string,
  *     desc: boolean
- * }} QueryParams
+ * }} SearchParams
  */
 
 
