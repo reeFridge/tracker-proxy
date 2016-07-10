@@ -18,7 +18,7 @@ class ITrackerManager extends EventEmitter {
 	/**
 	 * Include tracker in search
 	 * @param {ITracker} tracker
-	 * @return {number|undefined} Index of tracker in array
+	 * @return {string|undefined} UID of tracker in list
 	 */
 	include(tracker) {
 		throw new TypeError('Method "include" is not implemented.');
@@ -26,10 +26,10 @@ class ITrackerManager extends EventEmitter {
 
 	/**
 	 * Exclude tracker from search
-	 * @param {number} index
+	 * @param {string} uid
 	 * @return {ITracker|undefined} Excluded Tracker instance
 	 */
-	exclude(index) {
+	exclude(uid) {
 		throw new TypeError('Method "exclude" is not implemented.');
 	}
 
