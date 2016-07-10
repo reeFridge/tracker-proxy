@@ -27,7 +27,7 @@ class ITrackerManager extends EventEmitter {
 	/**
 	 * Exclude tracker from search
 	 * @param {string} uid
-	 * @return {ITracker|undefined} Excluded Tracker instance
+	 * @return {boolean} status of excluding
 	 */
 	exclude(uid) {
 		throw new TypeError('Method "exclude" is not implemented.');
