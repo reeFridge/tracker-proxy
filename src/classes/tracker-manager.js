@@ -15,13 +15,13 @@ class TrackerManager extends ITrackerManager {
 		super();
 
 		/**
-		 * @type {Array.<ITracker>}
+		 * @type {Object.<string, ITracker>}
 		 * @protected
 		 */
-		this._trackers = [];
+		this._trackers = {};
 
 		/**
-		 * Fired with: included tracker index
+		 * Fired with: included tracker UID
 		 * @type {string}
 		 */
 		this.EVENT_TRACKER_INCLUDED = 'include:complete';
@@ -56,9 +56,10 @@ class TrackerManager extends ITrackerManager {
 	 */
 	include(trackerAdapter) {
 		if (trackerAdapter instanceof ITracker) {
-			let index = this._trackers.push(trackerAdapter) - 1;
+			const uid = this.constructor._generateUID();
+			this._trackers[uid] = trackerAdapter;
 			this.emit(this.EVENT_TRACKER_INCLUDED, trackerAdapter);
-			return index;
+			return uid;
 		} else {
 			this.emit(this.EVENT_ERROR, new Error('Including error: All tracker adapter must be instances of ITracker'));
 		}
@@ -68,24 +69,26 @@ class TrackerManager extends ITrackerManager {
 	/**
 	 * @inheritDoc
 	 */
-	exclude(index) {
-		if (this._trackers[index] !== undefined) {
-			this.emit(this.EVENT_TRACKER_EXCLUDED, this._trackers[index]);
-			return this._trackers.splice(index, 1)[0];
+	exclude(uid) {
+		if (this._trackers[uid] !== undefined) {
+			const removingItem = this._trackers[uid];
+			this.emit(this.EVENT_TRACKER_EXCLUDED, removingItem);
+			delete this._trackers[uid];
+			return true;
 		} else {
-			this.emit(this.EVENT_ERROR, new Error(`Excluding error: Array not containing item with index = ${index}`));
+			this.emit(this.EVENT_ERROR, new Error(`Excluding error: Array not containing item with index = ${uid}`));
 		}
-		return undefined;
+		return false;
 	}
-
-	/**
 
 	/**
 	 * @inheritDoc
 	 */
 	search(searchParams) {
-		if (this._trackers.length !== 0) {
-			this._trackers.forEach(tracker => {
+		const uids = Object.keys(this._trackers);
+		if (uids.length !== 0) {
+			uids.forEach(uid => {
+				const tracker = this._trackers[uid];
 				tracker.search(searchParams)
 					.then(searchResponse => {
 						this.emit(this.EVENT_SEARCH_RESPONSE, tracker, searchResponse);
@@ -97,6 +100,14 @@ class TrackerManager extends ITrackerManager {
 		} else {
 			this.emit(this.EVENT_ERROR, new Error('Search error: no one tracker is included'));
 		}
+	}
+
+	/**
+	 * @return {string}
+	 * @protected
+	 */
+	static _generateUID() {
+		return '_' + Math.random().toString(36).substr(2, 9);
 	}
 }
 
