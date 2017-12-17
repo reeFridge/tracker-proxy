@@ -10,7 +10,6 @@ exports.base = {
 };
 
 exports.adapters = {
-	KAT: require(`${DIR_ADAPTERS}/kat`),
 	TPB: require(`${DIR_ADAPTERS}/tpb`)
 };
 

@@ -2,7 +2,7 @@
 
 const AbstractTrackerAdapter = require('../../../classes/abstract-tracker-adapter');
 const SearchResponse = require('./search-response');
-const thePirateBay = require('tortuga');
+const thePirateBay = require('thepiratebay');
 
 /**
  * KickAssTorrent adapter
@@ -22,9 +22,9 @@ class TrackerAdapter extends AbstractTrackerAdapter {
 	_searchRequest(queryString) {
 		return new Promise((resolve, reject) => {
 			try {
-				this._adaptee.search(queryString, results => {
-					resolve(results);
-				});
+				this._adaptee
+					.search(queryString)
+					.then(resolve);
 			} catch(err) {
 				reject(err);
 			}
