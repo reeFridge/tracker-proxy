@@ -23,7 +23,11 @@ class TrackerAdapter extends AbstractTrackerAdapter {
 		return new Promise((resolve, reject) => {
 			try {
 				this._adaptee
-					.search(queryString)
+					.search(queryString, {
+						category: 'video',
+						orderBy: 'seeds',
+                        sortBy: 'desc'
+					})
 					.then(resolve);
 			} catch(err) {
 				reject(err);
